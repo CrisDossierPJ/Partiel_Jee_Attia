@@ -14,7 +14,11 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-
+/**
+ * Order Entity
+ * @author Christian
+ *
+ */
 
 @Entity
 @Table(name="\"order\"")
@@ -31,17 +35,26 @@ public class Order {
 	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	private User user;
 	
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public Long getId() {
 		return id;
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 */
 	public User getUser() {
 		return user;
 	}
 
-
+	/**
+	 * 
+	 * @param user
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}

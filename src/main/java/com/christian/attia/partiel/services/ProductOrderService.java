@@ -18,22 +18,24 @@ import javax.ws.rs.core.MediaType;
 
 import com.christian.attia.partiel.database.PersistenceManager;
 import com.christian.attia.partiel.database.ScopedEntityManager;
+import com.christian.attia.partiel.database.entities.Order;
 import com.christian.attia.partiel.database.entities.Product;
+import com.christian.attia.partiel.database.entities.ProductOrder;
 
 
 @Stateless
 @LocalBean
-@Path("/products")
-public class ProductService {
+@Path("/productorders")
+public class ProductOrderService {
 
 	@GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Product> getAllProducts() {
+    public List<ProductOrder> getAllProductOrders() {
     	try (ScopedEntityManager em = getScopedEntityManager()) {
     		
-    		List<Product> products = em.createQuery("select p from Product p").getResultList();
+    		List<ProductOrder> orders = em.createQuery("select p from ProductOrder p ").getResultList();
     		
-			return  products;
+			return  orders;
 		}
     }
 	
@@ -41,15 +43,15 @@ public class ProductService {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Product getProduct(@PathParam("id") Long id) {
+    public ProductOrder getProductOrder(@PathParam("id") Long id) {
     	try (ScopedEntityManager em = getScopedEntityManager()) {
     		
-    		TypedQuery<Product> query = em.createQuery("select p from Product p where p.id = :id", Product.class);
+    		TypedQuery<ProductOrder> query = em.createQuery("select p from ProductOrder p where p.id = :id", ProductOrder.class);
     		query.setParameter("id", id.intValue());
     		
-    		Product product = query.getSingleResult();
+    		ProductOrder productOrder = query.getSingleResult();
     		
-			return product;
+			return productOrder;
 		}
         
     }
@@ -58,14 +60,14 @@ public class ProductService {
     @DELETE
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteProduct(@PathParam("id") int id) {
+    public void deleteProductOrder(@PathParam("id") int id) {
     	try (ScopedEntityManager em = getScopedEntityManager()) {
     		
     		EntityTransaction tx = em.getTransaction();
 
     		tx.begin();
     		
-    		Query query = em.createQuery("delete from Product where id = :id");
+    		Query query = em.createQuery("delete from ProductOrder where id = :id");
     		
     		query.setParameter("id", id).executeUpdate();
     		
@@ -77,7 +79,7 @@ public class ProductService {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public void createProduct(Product product) {
+    public void createProductOrder(ProductOrder productOrder) {
     	try (ScopedEntityManager em = getScopedEntityManager()) {
     		
     		EntityTransaction tx = em.getTransaction();
@@ -86,7 +88,7 @@ public class ProductService {
     		
     		// TODO: création d'un utilisateur / ajouter un object user en paramètre
     		
-    		em.persist(product);
+    		em.persist(productOrder);
     		
     		tx.commit();
     		
@@ -97,7 +99,7 @@ public class ProductService {
     @PUT
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void updateUser(@PathParam("id") int id, Product product) {
+    public void updateProductOrder(@PathParam("id") int id, ProductOrder productOrder) {
     	try (ScopedEntityManager em = getScopedEntityManager()) {
     		
     		EntityTransaction tx = em.getTransaction();
@@ -108,14 +110,15 @@ public class ProductService {
     		
     		
     		
-    		Query query = em.createQuery("update Product p set"
-    				+ "  p.name = :name"
-    				+ ", p.price = :price"
+    		Query query = em.createQuery("update ProductOrder p set"
+    				+ " p.order_id = :order_id"
+    				+ "  p.product_id = :product_id"
     				+ "  where p.id = :id");
     		
     		query.setParameter("id", id);
-    		query.setParameter("name", product.getName());
-    		query.setParameter("price", product.getPrice());
+    		query.setParameter("order_id", productOrder.getOrder());
+    		query.setParameter("product_id", productOrder.getProduct());
+
     		
     		query.executeUpdate();
     		

@@ -21,7 +21,11 @@ import com.christian.attia.partiel.database.ScopedEntityManager;
 import com.christian.attia.partiel.database.entities.Order;
 import com.christian.attia.partiel.database.entities.Product;
 
-
+/**
+ * CRUD FOR ORDER SERVICE
+ * @author Christian
+ *
+ */
 @Stateless
 @LocalBean
 @Path("/orders")
@@ -29,6 +33,12 @@ public class OrderService {
 
 	@GET
     @Produces(MediaType.APPLICATION_JSON)
+	/**
+	 * Equivalent de SELECT * from product
+	 * 
+	 *  retourne une liste de produit sous la fomr d'un JSON sur votre navigateur
+	 * @return
+	 */
     public List<Order> getAllOrders() {
     	try (ScopedEntityManager em = getScopedEntityManager()) {
     		
@@ -42,6 +52,13 @@ public class OrderService {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    /**
+     * Equivalent de Select * from product where id = param
+     * 
+     * retourne un seul produit
+     * @param id
+     * @return
+     */
     public Order getOrder(@PathParam("id") Long id) {
     	try (ScopedEntityManager em = getScopedEntityManager()) {
     		
@@ -59,6 +76,11 @@ public class OrderService {
     @DELETE
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    /**
+     * equivalent de DELETE FROM WHERE
+     * supprime le produit
+     * @param id
+     */
     public void deleteOrder(@PathParam("id") int id) {
     	try (ScopedEntityManager em = getScopedEntityManager()) {
     		
@@ -78,6 +100,12 @@ public class OrderService {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
+    /**
+     * equivalent de ISNERT INTO ...
+     * 
+     * Cree le produit
+     * @param order
+     */
     public void createOrder(Order order) {
     	try (ScopedEntityManager em = getScopedEntityManager()) {
     		
@@ -98,6 +126,13 @@ public class OrderService {
     @PUT
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    /**
+     * equivalent de UPDATE...
+     * 
+     * Modifie le O
+     * @param id
+     * @param order
+     */
     public void updateOrder(@PathParam("id") int id, Order order) {
     	try (ScopedEntityManager em = getScopedEntityManager()) {
     		
@@ -114,7 +149,7 @@ public class OrderService {
     				+ "  where o.id = :id");
     		
     		query.setParameter("id", id);
-    		query.setParameter("user_id", order.getUser().getId());
+    		query.setParameter("user_id", order.getUser());
 
     		
     		query.executeUpdate();
@@ -123,7 +158,10 @@ public class OrderService {
     		
     	}
     }
-	
+	/**
+	 * Création de l'instance de l'entity manager
+	 * @return
+	 */
     public ScopedEntityManager getScopedEntityManager() {
 		return PersistenceManager.getInstance().getScopedEntityManagerFactory().createScopedEntityManager();
 	}

@@ -21,7 +21,11 @@ import com.christian.attia.partiel.database.ScopedEntityManager;
 import com.christian.attia.partiel.database.entities.Currency;
 import com.christian.attia.partiel.database.entities.Product;
 
-
+/**
+ * 
+ * @author Christian
+ *
+ */
 @Stateless
 @LocalBean
 @Path("/currencies")
@@ -29,6 +33,11 @@ public class CurrencyService {
 
 	@GET
     @Produces(MediaType.APPLICATION_JSON)
+	/**
+	 * Equivalent de SELECT * FROM Currency 
+	 * Retourne le resultat sous la forme d'une liste json sur le navigateur
+	 * @return
+	 */
     public List<Currency> getAllCurrencies() {
     	try (ScopedEntityManager em = getScopedEntityManager()) {
     		
@@ -42,6 +51,13 @@ public class CurrencyService {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    /**
+     * Equivalent de Select * from Currency Where id = param
+     * 
+     * Retourne un seul résultat
+     * @param id
+     * @return
+     */
     public Currency getCurrency(@PathParam("id") Long id) {
     	try (ScopedEntityManager em = getScopedEntityManager()) {
     		
@@ -59,6 +75,12 @@ public class CurrencyService {
     @DELETE
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    /**
+     * Equivalent de DELETE FROM currency WHERE id = param
+     * 
+     * 
+     * @param id
+     */
     public void deleteCurrency(@PathParam("id") int id) {
     	try (ScopedEntityManager em = getScopedEntityManager()) {
     		
@@ -78,6 +100,12 @@ public class CurrencyService {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
+    /**
+     * Equivalent de INSERT INTO CURRENCY ..
+     * 
+     * 
+     * @param currency
+     */
     public void createCurrency(Currency currency) {
     	try (ScopedEntityManager em = getScopedEntityManager()) {
     		
@@ -97,6 +125,13 @@ public class CurrencyService {
     @PUT
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    /**
+     * Equivalent de UPDATE FROM CURRANCY VALUES()..
+     * 
+     * 
+     * @param id
+     * @param currency
+     */
     public void updateCurrency(@PathParam("id") int id, Currency currency) {
     	try (ScopedEntityManager em = getScopedEntityManager()) {
     		
@@ -121,7 +156,10 @@ public class CurrencyService {
     		
     	}
     }
-	
+	/**
+	 * Création de l'instance de l'entity manager
+	 * @return
+	 */
     public ScopedEntityManager getScopedEntityManager() {
 		return PersistenceManager.getInstance().getScopedEntityManagerFactory().createScopedEntityManager();
 	}

@@ -13,6 +13,12 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+
+/**
+ * Product Order Entity
+ * @author Christian
+ *
+ */
 @Entity
 @Table(name="productOrder")
 public class ProductOrder {
@@ -30,27 +36,45 @@ public class ProductOrder {
 	@JoinColumn(name="order_id")
 	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	private Order order;
-
+	/**
+	 * 
+	 * @return
+	 */
 	public Long getId() {
 		return id;
 	}
-
+	/**
+	 * 
+	 * @param id
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public Product getProduct() {
 		return product;
 	}
-
+	/**
+	 * 
+	 * @param product
+	 */
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public Order getOrder() {
 		return order;
 	}
-
+	/**
+	 * 
+	 * @param order
+	 */
 	public void setOrder(Order order) {
 		this.order = order;
 	}

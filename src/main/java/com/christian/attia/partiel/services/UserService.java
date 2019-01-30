@@ -21,7 +21,11 @@ import com.christian.attia.partiel.database.ScopedEntityManager;
 import com.christian.attia.partiel.database.entities.Product;
 import com.christian.attia.partiel.database.entities.User;
 
-
+/**
+ * CRUD FOR USER
+ * @author Christian
+ *
+ */
 @Stateless
 @LocalBean
 @Path("/users")
@@ -126,7 +130,10 @@ public class UserService {
     		
     	}
     }
-	
+	/**
+	 * Création de l'instance de l'entity manager
+	 * @return
+	 */
     public ScopedEntityManager getScopedEntityManager() {
 		return PersistenceManager.getInstance().getScopedEntityManagerFactory().createScopedEntityManager();
 	}
