@@ -1,0 +1,52 @@
+// CREATE A PRODUCT
+curl -i -X POST -H "Content-Type: application/json" -d "{\"name\":\"produit 1\", \"price\":\"10\"}" http://localhost:8080/christian.attia.partiel/rest/products
+
+// UPDATE A PRODUCT
+curl -i -X PUT -H "Content-Type: application/json" -d "{\"name\":\"produit 1\", \"price\":\"20\"}" http://localhost:8080/christian.attia.partiel/rest/products/1
+
+// DELETE A PRODUCT
+curl -i -X DELETE http://localhost:8080/christian.attia.partiel/rest/products/1
+
+
+
+
+// CREATE A CURRENCY
+curl -i -X POST -H "Content-Type: application/json" -d "{\"lib_currency\":\"dollar\"}" http://localhost:8080/christian.attia.partiel/rest/currencies
+
+// UPDATE A CURRENCY
+curl -i -X PUT -H "Content-Type: application/json" -d "{\"lib_currency\":\"euro\"}" http://localhost:8080/christian.attia.partiel/rest/currencies/1
+
+// DELETE A CURRENCY
+curl -i -X DELETE http://localhost:8080/christian.attia.partiel/rest/currencies/1
+
+
+
+// CREATE A USER
+curl -i -X POST -H "Content-Type: application/json" -d "{\"name\":\"Christian\", \"surname\":\"Attia\", \"age\":\"21\"}" http://localhost:8080/christian.attia.partiel/rest/users
+
+// UPDATE A USER
+curl -i -X PUT -H "Content-Type: application/json" -d "{\"name\":\"Bilbon\", \"surname\":\"Bilboquet\", \"age\":\"35\"}" http://localhost:8080/christian.attia.partiel/rest/users/1
+
+// DELETE A USER
+curl -i -X DELETE http://localhost:8080/christian.attia.partiel/rest/users/1
+
+
+
+// CREATE AN ORDER
+curl -i -X POST -H "Content-Type: application/json" -d "{\"user\":{\"name\":\"Chrisetian\", \"surname\":\"Atteia\", \"age\":\"21\"}}" http://localhost:8080/christian.attia.partiel/rest/orders
+
+// UPDATE A ORDER
+curl -i -X PUT -H "Content-Type: application/json" -d "{\"user\":{\"name\":\"Mirabeau\", \"surname\":\"Attia\", \"age\":\"21\"}}" http://localhost:8080/christian.attia.partiel/rest/orders/1
+
+// DELETE A ORDER
+curl -i -X DELETE http://localhost:8080/christian.attia.partiel/rest/orders/1
+
+
+// CREATE AN PRODUCTORDER
+curl -i -X POST -H "Content-Type: application/json" -d "{\"order\":{\"user_id\":\"1\"}, \"product\":{\"name\":\"produit 1\", \"price\":\"10\"} }" http://localhost:8080/christian.attia.partiel/rest/productorders
+
+// UPDATE A PRODUCTORDER
+curl -i -X PUT -H "Content-Type: application/json" -d "{\"user\":{\"name\":\"Mirabeau\", \"surname\":\"Attia\", \"age\":\"21\"}}" http://localhost:8080/christian.attia.partiel/rest/productorders/1
+
+// DELETE A PRODUCTORDER
+curl -i -X DELETE http://localhost:8080/christian.attia.partiel/rest/productorders/1
